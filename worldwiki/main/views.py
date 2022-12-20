@@ -57,7 +57,7 @@ def loginPageView(request) :
 
         for name in usernames :
             print(name[0])
-
+            
         if len(usernames) > 0 :
             for name in usernames :
                 if username == name[0] :
@@ -66,7 +66,7 @@ def loginPageView(request) :
 
                     if hash_password == user.password :
                         request.session['userid'] = user.id
-                        return redirect(homePageView)
+                        return redirect(indexPageView)
 
                     else :
                         error = True
@@ -94,7 +94,7 @@ def signupPageView(request) :
 # vvv    VIEWS RELATED TO THE MAIN/HOME PAGES    vvv
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-def homePageView(request) :
+def indexPageView(request) :
     logged_in, user = loggedIn(request)
     
     context = {
@@ -102,6 +102,6 @@ def homePageView(request) :
         'user' : user,
     }
 
-    return render(request, 'main/home.html', context)
+    return render(request, 'main/index.html', context)
 
 
