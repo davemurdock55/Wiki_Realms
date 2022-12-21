@@ -1,0 +1,104 @@
+{% extends 'creator_base.html' %}
+{% load static %}
+
+{% block title %}Creator Dashboard{% endblock %}
+
+
+
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-9 text-center">
+          <h1>Creator Dashboard</h1>
+          <h2>Welcome to the Creator Dashboard!</h2>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="{% url 'create_world' %}" class="btn-get-started scrollto">Create a World</a>
+      </div>
+
+      <div class="row icon-boxes">
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-stack-line"></i></div>
+            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-palette-line"></i></div>
+            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-command-line"></i></div>
+            <h4 class="title"><a href="">Magni Dolores</a></h4>
+            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-fingerprint-line"></i></div>
+            <h4 class="title"><a href="">Nemo Enim</a></h4>
+            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+<section>
+
+    {% comment %} 
+    To visualize a file structure in a Django HTML template, you can use an HTML list (<ul>) 
+    to represent the hierarchy of the files and directories. You can use nested lists to represent subdirectories, 
+    and list items (<li>) to represent individual files.
+
+    Here's an example of how you might do this:
+
+    In this example, files is a list of objects representing the files
+    and directories in the file structure. 
+
+    Each object has a name attribute for the file or directory name, 
+    and an is_dir attribute that indicates whether it is a directory.
+    If the file is a directory, it also has a subfiles attribute that is a list of the files and subdirectories within that directory
+    {% endcomment %}
+    
+    <!-- <ul>
+        {% for file in files %}
+            {% comment %} If it is a directory {% endcomment %}
+            {% if file.is_dir %}
+            <li>
+                {% comment %} Show the directory's name {% endcomment %}
+                {{ file.name }}
+              <ul>
+                {% comment %} Loop through each file in the files list and use an if statement to check whether it is a directory or a file.  {% endcomment %}
+                {% for subfile in file.subfiles %}
+                    {% comment %} Create a nested list to represent the subfiles.  {% endcomment %}
+                    <li>{{ subfile.name }}</li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% comment %} If it is a file{% endcomment %}
+            {% else %}
+                {% comment %} Create a list item for the file.  {% endcomment %}
+                <li>{{ file.name }}</li>
+            {% endif %}
+        {% endfor %}
+      </ul>-->
+    {% comment %} 
+    You can then use this template in your Django view to pass in 
+    the list of files and render the file structure in your HTML page. 
+    {% endcomment %}
+</section>
+
+
+{% endblock %}

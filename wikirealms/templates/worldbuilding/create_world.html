@@ -1,0 +1,70 @@
+{% extends 'creator_base.html' %}
+{% load static %}
+
+{% block title %}Create a World{% endblock %}
+
+
+
+{% block content %}
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+  
+          <div class="section-title mt-5">
+            <h2>Create a "World"</h2>
+            <p>A <b>World</b> can be anything as small as a town or as expansive as an entire universe! It's simply where your story takes place.</p>
+
+            <hr style="margin: 25px 50px 75px 50px">
+
+            <p>Let's get started! Fill out the basic information to create your new world! You can always come back and edit these details</p>
+          </div>
+  
+          {% comment %} The Map area :) {% endcomment %}
+          {% comment %} <div>
+            <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
+          </div> {% endcomment %}
+  
+          <div class="row mt-1">
+  
+            <div class="col-lg-12 mt-5 mt-lg-0">
+  
+              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                  {% csrf_token %}
+                <div class="row gy-2 gx-md-3">
+                  {% comment %} This is how you do two inputs per line :) {% endcomment %}
+                  {% comment %} 
+                  <div class="col-md-6 form-group">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  </div> 
+                  {% endcomment %}
+                  <div class="col-md-12 form-group">
+                    <input type="text" name="world_name" class="form-control" id="name" placeholder="World Name" required>
+                  </div>
+                  <div class="form-group col-12">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                  </div>
+                  <div class="form-group col-12">
+                    <textarea class="form-control" style="resize: none;" name="world_description" rows="5" placeholder="Description" required></textarea>
+                  </div>
+                  <div class="my-3 col-12">
+                    <div class="loading">Your world is being created...</div>
+                    <div class="error-message">Sorry, something went wrong! :/ Please try again!</div>
+                    <div class="sent-message">Your world was successfully created!</div>
+                  </div>
+                  <div class="text-center col-12"><button type="submit">Create</button></div>
+                </div>
+              </form>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+      </section><!-- End Contact Section -->
+
+
+{% endblock %}
