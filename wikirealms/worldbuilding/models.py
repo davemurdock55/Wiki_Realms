@@ -38,6 +38,7 @@ class PlotArc(Page):
 class PlotPoint(Page):
      # The question is, do we want a plotpoint to NEED/Be dependent on a PlotArc existing?
      plot_arc = models.ForeignKey(to='PlotArc', on_delete=models.SET_NULL)
+     # a plot point can only be in one setting (unless we want to change this to be many-to-many)
      setting = models.ForeignKey(to='Setting', on_delete=models.SET_NULL)
 
      pages = models.ManyToManyField(to='Page')
@@ -88,66 +89,95 @@ class CharacterRelationship(models.Model):
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 # vvv    CONTENT BLOCK MODELS    vvv
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
-class Text(models.Model):
+class ContentBlock(models.Model):
+     # the page that the content block is on. The content block will be deleted if the page is deleted
      page = models.ForeignKey(to='Page', on_delete=models.CASCADE)
 
-     name = models.CharField(max_length=100)
-     text = models.TextField()
-     
+
      def __str__(self):
           return self.name
 
 
-class Image(models.Model):
-     page = models.ForeignKey(to='Page', on_delete=models.CASCADE)
+class Text(ContentBlock):
+     name = models.CharField(max_length=100)
+     text = models.TextField()
 
+
+class Image(ContentBlock):
      name = models.CharField(max_length=100)
      image = models.ImageField(upload_to='images/')
 
-     def __str__(self):
-          return self.name
 
 
-class Graph(models.Model):
-     page = models.ForeignKey(to='Page', on_delete=models.CASCADE)
+class CharacterBlock(ContentBlock):
+     character = models.ForeignKey(to='Character', on_delete=models.CASCADE)
 
+class ItemBlock(ContentBlock):
+     item = models.ForeignKey(to='Item', on_delete=models.CASCADE)
+
+
+# class ItemBlock(ContentBlock):
+#      page = models.ForeignKey(to='Page', on_delete=models.CASCADE)
+#      item = models.ForeignKey(to='Item', on_delete=models.CASCADE)
+
+
+class CharacterList(ContentBlock):
+     # a character list can have multiple characters and a character can be in multiple character lists
+     characters = models.ManyToManyField(to='Character')
+     
+     name = models.CharField(max_length=100)
+     
+     
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Add more basic content blocks here
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+class Graph(ContentBlock):
      name = models.CharField(max_length=100)
      x_label = models.CharField(max_length=100)
      y_label = models.CharField(max_length=100)
      data = models.JSONField()
-     
-     def __str__(self):
-          return self.name
 
 
-class CharacterWeb(models.Model):
-     page = models.ForeignKey(to='Page', on_delete=models.CASCADE)
 
+class CharacterWeb(ContentBlock):
      name = models.CharField(max_length=100)
      # image = models.ImageField(upload_to='images/') # this was automatically created by co-pilot
      description = models.CharField(max_length=255)
 
      # this was automatically created by co-pilot
      relationships = models.ManyToManyField(to='CharacterRelationship')
-     
-     def __str__(self):
-          return self.name
 
 
-class Map(models.Model):
-     page = models.ForeignKey(to='Page', on_delete=models.CASCADE)
+
+class Timeline(ContentBlock):
+     name = models.CharField(max_length=100)
+     description = models.CharField(max_length=255)
+
+     # this was automatically created by co-pilot
+     plot_points = models.ManyToManyField(to='PlotPoint')
+
+
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# Add more complex content blocks here
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+
+
+
+class Map(ContentBlock):
      # setting = models.ForeignKey(to='Setting', on_delete=models.SET_NULL, default=None, null=True)
 
      name = models.CharField(max_length=100)
      image = models.ImageField(upload_to='images/')
-     
-     def __str__(self):
-          return self.name
 
 
-class Pin(models.Model):
-     page = models.ForeignKey(to='Page', on_delete=models.CASCADE)
+class Pin(ContentBlock):
      map = models.ForeignKey(to='Map', on_delete=models.CASCADE)
 
      # Supposedly, these next three lines should allow the "name" field to come from the "name"field of any other model in the database???
@@ -161,13 +191,9 @@ class Pin(models.Model):
      icon = models.ImageField(upload_to='images/')
      x = models.PositiveSmallIntegerField()
      y = models.PositiveSmallIntegerField()
-     
-     def __str__(self):
-          return self.name
 
 
-class Region(models.Model):
-     page = models.ForeignKey(to='Page', on_delete=models.CASCADE)
+class Region(ContentBlock):
      map = models.ForeignKey(to='Map', on_delete=models.CASCADE)
      region_type = models.ForeignKey(to='RegionType', on_delete=models.CASCADE)
 
@@ -183,14 +209,11 @@ class Region(models.Model):
      shape = models.GeometryField()
 
 
-     def __str__(self):
-          return self.name
-
-
 # This is supposed to be a reference table for Regions so that we can standardize and protect the data from errors
-class RegionType(models.Model):
+class RegionType(ContentBlock):
      region_type_name = models.CharField(max_length=100)
 
+     # This might throw errors and you might need to override it (this model technically already inherits the __str__ method from the ContentBlock model)
      def __str__(self):
           return self.region_type_name
 

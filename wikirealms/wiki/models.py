@@ -10,6 +10,7 @@ class MediaProject(models.Model):
      def __str__(self):
           return self.name
 
+
 class WikiPage(models.Model):
      users = models.ManyToManyField(to='User')
      realm = models.ForeignKey(to='Realm', on_delete=models.CASCADE)
