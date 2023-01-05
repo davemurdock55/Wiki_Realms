@@ -1,5 +1,10 @@
 from django.db import models
 
+# Used to connect any table to any other table generically
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+
+
 # Create your models here.
 class MediaProject(models.Model):
      name = models.CharField(max_length=100)
