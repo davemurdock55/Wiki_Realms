@@ -36,6 +36,9 @@ class PlotArc(Page):
 
 
 class PlotPoint(Page):
+     # Not sure if we want PlotPoint to inherit from page or not!
+
+
      # The question is, do we want a plotpoint to NEED/Be dependent on a PlotArc existing?
      plot_arc = models.ForeignKey(to='PlotArc', on_delete=models.SET_NULL)
      # a plot point can only be in one setting (unless we want to change this to be many-to-many)
