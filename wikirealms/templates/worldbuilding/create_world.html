@@ -1,7 +1,7 @@
 {% extends 'creator_base.html' %}
 {% load static %}
 
-{% block title %}Create a World{% endblock %}
+{% block title %}Create a Realm{% endblock %}
 
 
 
@@ -12,10 +12,10 @@
         <div class="container" data-aos="fade-up">
   
           <div class="section-title mt-5">
-            <h2>Create a "World"</h2>
-            <p>A <b>World</b> can be anything as small as a town or as expansive as an entire universe! It's simply where your story takes place.</p>
+            <h2>Create a Realm</h2>
+            <p>A <b>realm</b> can be anything as small as a town or as expansive as an entire universe! It's simply where your story takes place.</p>
 
-            <hr style="margin: 25px 50px 75px 50px">
+            <hr style="margin: 25px 50px 65px 50px">
 
             <p>Let's get started! Fill out the basic information to create your new world! You can always come back and edit these details</p>
           </div>
@@ -42,7 +42,7 @@
                   </div> 
                   {% endcomment %}
                   <div class="col-md-12 form-group">
-                    <input type="text" name="world_name" class="form-control" id="name" placeholder="World Name" required>
+                    <input type="text" name="world_name" class="form-control" id="name" placeholder="Realm Name" required>
                   </div>
                   <div class="form-group col-12">
                     <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
@@ -51,9 +51,9 @@
                     <textarea class="form-control" style="resize: none;" name="world_description" rows="5" placeholder="Description" required></textarea>
                   </div>
                   <div class="my-3 col-12">
-                    <div class="loading">Your world is being created...</div>
+                    <div class="loading">Your realm is being created...</div>
                     <div class="error-message">Sorry, something went wrong! :/ Please try again!</div>
-                    <div class="sent-message">Your world was successfully created!</div>
+                    <div class="sent-message">Your realm was successfully created!</div>
                   </div>
                   <div class="text-center col-12"><button type="submit">Create</button></div>
                 </div>

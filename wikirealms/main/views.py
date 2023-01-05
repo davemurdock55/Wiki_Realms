@@ -45,27 +45,45 @@ def loggedIn(request) :
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 def loginPageView(request) :
+    # Setting the error variable to False
     error = False
+    # Getting the logged_in and user variables from the loggedIn function (using the request)
     logged_in, user = loggedIn(request)
 
+    # print "login view" along with the request's method to the console
     print('login view ' + request.method)
 
+    # if the request's method is POST
     if request.method == 'POST' :
+        # get the username from the request
         username = request.POST['username']
+        # get the password from the request
         password = request.POST['password']
+        # get all the usernames from the database that match the username from the request
         usernames = Person.objects.values_list('username')
 
+        # print all the usernames to the console (was this for bugfixing or something?)
+        # for each username among all the usernames in the database
         for name in usernames :
+            # print that username to the console
             print(name[0])
-            
+        
+        # if there are more than one username that match
         if len(usernames) > 0 :
+            # for each username among all the usernames in the database that match the username from the request
             for name in usernames :
+                # if the "name" username matches the username from the request
                 if username == name[0] :
+                    # get the user's information from the database
                     user = Person.objects.get(username=username)
+                    # hash the password using the salt
                     hash_password = sha256((password + salt[0:(len(password) + len(username))]).encode('utf-8')).hexdigest()
 
+                    # if the hashed password is the same as the user's password
                     if hash_password == user.password :
+                        # set the user's id to the session storage
                         request.session['userid'] = user.id
+                        # then redirect to the indexPageView function
                         return redirect(indexPageView)
 
                     else :
@@ -82,7 +100,7 @@ def loginPageView(request) :
         'title' : 'Log in'
     }
 
-    return render(request, 'main/login.html')
+    return render(request, 'main/login.html', context)
 
 
 def signupPageView(request) :

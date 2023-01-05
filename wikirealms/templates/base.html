@@ -26,7 +26,7 @@
   <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
+  
   <!-- Template Main CSS File -->
   <link href="{% static '/css/style.css' %}" rel="stylesheet">
 
@@ -36,13 +36,26 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  {% comment %} {% if  %}
+  <style>
+      prim
+
+  </style>
+  {% elif %}
+  <style>
+
+
+
+  </style>
+  {% endif %} {% endcomment %}
+  
 </head>
 <body>
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="{% url 'home' %}">WikiRealms</a></h1>
+      <h1 class="logo"><a href="{% url 'home' %}">Wiki Realms</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="{% static 'img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -72,7 +85,8 @@
             </ul>
           </li> {% endcomment %}
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="getstarted scrollto" href="#">Sign Up</a></li>
+          <li><a class="login scrollto" href="#">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

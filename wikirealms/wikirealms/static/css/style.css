@@ -226,6 +226,25 @@ h6 {
   background: #3194db;
 }
 
+/* ---------------------------- I ADDED THESE ---------------------------- */
+.navbar .login,
+.navbar .login:focus {
+  background: #fff;
+  border: 2px solid #2487ce;
+  padding: 6px 18px;
+  margin-left: 30px;
+  border-radius: 4px;
+  color: #2487ce;
+}
+
+.navbar .login:hover,
+.navbar .login:focus:hover {
+  background: #2487ce;
+  color: #fff;
+}
+
+/* ---------------------------- END ---------------------------- */
+
 .navbar .dropdown ul {
   display: block;
   position: absolute;

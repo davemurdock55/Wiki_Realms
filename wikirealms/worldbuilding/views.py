@@ -9,7 +9,7 @@ def  creatorDashboardPageView(request) :
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# vvv    VIEWS RELATED TO WORLDS    vvv
+# vvv    WORLDS VIEWS    vvv
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 def createWorldPageView(request) :
@@ -25,7 +25,7 @@ def editWorldPageView(request) :
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# vvv    VIEWS RELATED TO CHARACTERS    vvv
+# vvv    CHARACTERS VIEWS    vvv
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 def characterPageView(request) :
@@ -39,7 +39,7 @@ def editCharacterPageView(request) :
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-# vvv    VIEWS RELATED TO PLOTS    vvv
+# vvv    PLOTS VIEWS    vvv
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 def plotArcPageView(request) :
    return render(request, 'worldbuilding/plot_arc.html')
