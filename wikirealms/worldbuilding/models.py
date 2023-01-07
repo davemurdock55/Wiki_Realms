@@ -184,7 +184,7 @@ class MapBlock(ContentBlock):
      image = models.ImageField(upload_to='images/')
 
 
-class Pin(ContentBlock):
+class Pin(models.Model):
      map = models.ForeignKey(to='MapBlock', on_delete=models.CASCADE)
 
      # Supposedly, these next three lines should allow the "name" field to come from the "name"field of any other model in the database???
@@ -200,7 +200,7 @@ class Pin(ContentBlock):
      y = models.PositiveSmallIntegerField()
 
 
-class Region(ContentBlock):
+class Region(models.Model):
      map = models.ForeignKey(to='MapBlock', on_delete=models.CASCADE)
      region_type = models.ForeignKey(to='RegionType', on_delete=models.CASCADE)
 
@@ -217,11 +217,12 @@ class Region(ContentBlock):
 
 
 # This is supposed to be a reference table for Regions so that we can standardize and protect the data from errors
-class RegionType(ContentBlock):
+class RegionType(models.Model):
      region_type_name = models.CharField(max_length=100)
 
      # This might throw errors and you might need to override it (this model technically already inherits the __str__ method from the ContentBlock model)
      def __str__(self):
           return self.region_type_name
+
 
 

@@ -46,3 +46,4 @@ def plotArcPageView(request) :
 
 def editPlotArcPageView(request) :
    return render(request, 'worldbuilding/edit_plot_arc.html')
+
