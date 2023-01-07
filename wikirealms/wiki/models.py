@@ -20,11 +20,7 @@ class WikiPage(models.Model):
      users = models.ManyToManyField(to='main.User')
      realm = models.ForeignKey(to='worldbuilding.Realm', on_delete=models.CASCADE)
      
-     # Supposedly, these next three lines should allow the "title" field to come from the "name" field of any other model in the database???
-     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-     object_id = models.PositiveIntegerField()
-     title = GenericForeignKey('content_type', 'object_id')
-     
+     title = models.CharField(max_length=100)
      header_image = models.ImageField(upload_to='images/')
      subheading = models.CharField(max_length=100)
      description = models.CharField(max_length=255)

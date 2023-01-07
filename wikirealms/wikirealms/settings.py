@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django_extensions',
+    'django.contrib.gis',
     'main.apps.MainConfig',
     'wiki.apps.WikiConfig',
     'worldbuilding.apps.WorldbuildingConfig',
-    'django_extensions',
 
 ]
 
@@ -82,12 +83,12 @@ WSGI_APPLICATION = "wikirealms.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'worldwiki',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'wikirealms',
         'USER': 'postgres',
         'PASSWORD': '1El2Is5Us10!',
         'HOST': 'localhost',
-        'PORT': 5433
+        'PORT': 5432
     }
 }
 
