@@ -3,10 +3,14 @@ from django.db import models
 # Used to connect any table to any other table generically
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+# import django GEO
+from django.contrib.gis.db import models
+
 
 
 # Create your models here.
 class Realm(models.Model):
+     users = models.ManyToManyField(to='main.User')
      name = models.CharField(max_length=100)
      description = models.CharField(max_length=255)
      image = models.ImageField(upload_to='images/')
@@ -20,7 +24,7 @@ class Realm(models.Model):
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 class Page(models.Model):
-     users = models.ManyToManyField(to='User')
+     users = models.ManyToManyField(to='main.User')
      realm = models.ForeignKey(to='Realm', on_delete=models.CASCADE)
      
      name = models.CharField(max_length=100)
@@ -32,7 +36,7 @@ class Page(models.Model):
           return self.name
 
 class PlotArc(Page):
-     media_project = models.ForeignKey(to='MediaProject', on_delete=models.SET_NULL)
+     media_project = models.ForeignKey(to='wiki.MediaProject', on_delete=models.SET_NULL, null=True)
 
 
 class PlotPoint(Page):
@@ -40,15 +44,15 @@ class PlotPoint(Page):
 
 
      # The question is, do we want a plotpoint to NEED/Be dependent on a PlotArc existing?
-     plot_arc = models.ForeignKey(to='PlotArc', on_delete=models.SET_NULL)
+     plot_arc = models.ForeignKey(to='PlotArc', on_delete=models.SET_NULL, null=True)
      # a plot point can only be in one setting (unless we want to change this to be many-to-many)
-     setting = models.ForeignKey(to='Setting', on_delete=models.SET_NULL)
+     backdrop = models.ForeignKey(to='Setting', on_delete=models.SET_NULL, null=True, related_name='backdrop')
 
-     pages = models.ManyToManyField(to='Page')
-     characters = models.ManyToManyField(to='Character')
-     items = models.ManyToManyField(to='Item')
-     magic_systems = models.ManyToManyField(to='Magic')
-     social_structures = models.ManyToManyField(to='SocialStructure')
+     pages = models.ManyToManyField(to='Page', related_name='pages')
+     characters = models.ManyToManyField(to='Character', related_name='characters')
+     items = models.ManyToManyField(to='Item', related_name='items')
+     magic_systems = models.ManyToManyField(to='Magic', related_name='magic_systems')
+     social_structures = models.ManyToManyField(to='SocialStructure', related_name='social_structures')
 
      # I think I want plot_progression to be able to be negative...?
      plot_progression = models.SmallIntegerField()
@@ -56,12 +60,12 @@ class PlotPoint(Page):
 
 class Character(Page):
      # can be negative or positive
-     development = models.SmallIntegerField()
+     overall_development = models.SmallIntegerField()
 
 
 
 class Setting(Page):
-     encompassing_setting = models.ForeignKey(to='Setting', on_delete=models.SET_NULL)
+     encompassing_setting = models.ForeignKey(to='Setting', on_delete=models.SET_NULL, null=True)
 
 
 class Item(Page):
@@ -101,12 +105,12 @@ class ContentBlock(models.Model):
           return self.name
 
 
-class Text(ContentBlock):
+class TextBlock(ContentBlock):
      name = models.CharField(max_length=100)
      text = models.TextField()
 
 
-class Image(ContentBlock):
+class ImageBlock(ContentBlock):
      name = models.CharField(max_length=100)
      image = models.ImageField(upload_to='images/')
 
@@ -173,7 +177,7 @@ class Timeline(ContentBlock):
 
 
 
-class Map(ContentBlock):
+class MapBlock(ContentBlock):
      # setting = models.ForeignKey(to='Setting', on_delete=models.SET_NULL, default=None, null=True)
 
      name = models.CharField(max_length=100)
@@ -181,7 +185,7 @@ class Map(ContentBlock):
 
 
 class Pin(ContentBlock):
-     map = models.ForeignKey(to='Map', on_delete=models.CASCADE)
+     map = models.ForeignKey(to='MapBlock', on_delete=models.CASCADE)
 
      # Supposedly, these next three lines should allow the "name" field to come from the "name"field of any other model in the database???
      content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
@@ -197,7 +201,7 @@ class Pin(ContentBlock):
 
 
 class Region(ContentBlock):
-     map = models.ForeignKey(to='Map', on_delete=models.CASCADE)
+     map = models.ForeignKey(to='MapBlock', on_delete=models.CASCADE)
      region_type = models.ForeignKey(to='RegionType', on_delete=models.CASCADE)
 
      # We want this to come from the Setting, Magic, or SocialStructure

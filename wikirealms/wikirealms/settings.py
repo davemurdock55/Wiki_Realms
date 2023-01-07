@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'wiki.apps.WikiConfig',
     'worldbuilding.apps.WorldbuildingConfig',
+    'django_extensions',
+
 ]
 
 MIDDLEWARE = [
@@ -89,6 +91,8 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'main.User'
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -120,6 +124,8 @@ USE_I18N = True
 USE_TZ = True
 
 
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -138,3 +144,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Used to allow users to store images to a database
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
+}

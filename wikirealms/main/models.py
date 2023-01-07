@@ -34,15 +34,15 @@ class User(AbstractUser):
      primary_content_type = models.CharField(max_length=50)
      description = models.CharField(max_length=255)
      date_first_published = models.DateTimeField(auto_now_add=False)
-     theme = models.ForeignKey(to='users.Theme', on_delete=models.SET_NULL, null=True)
-     media_projects = models.ManyToManyField(to='MediaProject')
-     realms = models.ManyToManyField(to='realms.Realm', through='UserRealmsAccess')
+     theme = models.ForeignKey(to='Theme', on_delete=models.SET_NULL, null=True)
+     media_projects = models.ManyToManyField(to='wiki.MediaProject')
+     realms = models.ManyToManyField(to='worldbuilding.Realm', through='UserRealmsAccess')
      
      
 class UserRealmsAccess(models.Model):
 
      user = models.ForeignKey(to='User', on_delete=models.CASCADE)
-     realm = models.ForeignKey(to='realms.Realm', on_delete=models.CASCADE)
+     realm = models.ForeignKey(to='worldbuilding.Realm', on_delete=models.CASCADE)
      permissions = models.CharField(max_length=1, choices=PERMISSIONS, default='V')
      
 
@@ -63,7 +63,7 @@ class UserPageAccess(models.Model):
 
 class UserMediaProjectAccess(models.Model):
      user = models.ForeignKey(to='User', on_delete=models.CASCADE)
-     media_project = models.ForeignKey(to='MediaProject', on_delete=models.CASCADE)
+     media_project = models.ForeignKey(to='wiki.MediaProject', on_delete=models.CASCADE)
      
      access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V')     
 
