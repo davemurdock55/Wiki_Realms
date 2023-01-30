@@ -6,13 +6,17 @@ urlpatterns = [
     path('creator_dashboard/', creatorDashboardPageView, name='creator_dashboard'),
     
     # world urls
-    path('create_world/', createWorldPageView, name='create_world'),
-    path('view_world/', worldPageView, name='viewWorld'),
-    path('edit_world/', editWorldPageView, name='editWorld'),
+    path('create_realm/', createRealmPageView, name='create_realm'),
+    path('view_realm/', viewRealmPageView, name='view_realm'),
+    path('edit_realm/', editRealmPageView, name='edit_realm'),
     # character urls
-    path('view_character/', characterPageView, name='viewCharacter'),
-    path('edit_character/', editCharacterPageView, name='editCharacter'),
+    path('view_character/', viewCharacterPageView, name='view_character'),
+    path('edit_character/', editCharacterPageView, name='edit_character'),
     # plot arc urls
-    path('view_plot_arc/', plotArcPageView, name='viewPlotArc'),
-    path('edit_plot_arc/', editPlotArcPageView, name='editPlotArc'),
+    path('view_plot_arc/', viewPlotArcPageView, name='view_plot_arc'),
+    path('edit_plot_arc/', editPlotArcPageView, name='edit_plot_arc'),
+    # other page urls
+    path('view_other_page/', viewOtherPageView, name='view_other_page'),
+    path('edit_other_page/', editOtherPageView, name='edit_other_page'),
 ]
+
