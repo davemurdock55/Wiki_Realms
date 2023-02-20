@@ -30,14 +30,14 @@ class Profile(models.Model):
      # get_full_name(): A method that returns the user's full name.
      # get_short_name(): A method that returns the user's first name.
      # __str__(): A method that returns a string representation of the user.
-     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
-     birthday = models.DateField(auto_now=False, auto_now_add=False)
-     primary_content_type = models.CharField(max_length=50)
-     description = models.CharField(max_length=255)
-     date_first_published = models.DateTimeField(auto_now_add=False)
-     theme = models.ForeignKey(to='Theme', on_delete=models.SET_NULL, null=True)
-     media_projects = models.ManyToManyField(to='wiki.MediaProject')
-     realms = models.ManyToManyField(to='worldbuilding.Realm', through='UserRealmsAccess')
+     user = models.OneToOneField(to=User, on_delete=models.CASCADE, blank=False, null=False)
+     birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
+     primary_content_type = models.CharField(max_length=50, blank=True, null=True)
+     description = models.CharField(max_length=255, blank=True, null=True)
+     date_first_published = models.DateTimeField(auto_now_add=False, blank=True, null=True)
+     theme = models.ForeignKey(to='Theme', on_delete=models.SET_NULL, blank=True, null=True)
+     media_projects = models.ManyToManyField(to='wiki.MediaProject', blank=True, null=True)
+     realms = models.ManyToManyField(to='worldbuilding.Realm', through='UserRealmsAccess', blank=True, null=True)
      
      # class Meta :
      #      db_table = 'UserProfile'
@@ -48,9 +48,9 @@ class Profile(models.Model):
      
 class UserRealmsAccess(models.Model):
 
-     user = models.ForeignKey(to='Profile', on_delete=models.CASCADE)
-     realm = models.ForeignKey(to='worldbuilding.Realm', on_delete=models.CASCADE)
-     permissions = models.CharField(max_length=1, choices=PERMISSIONS, default='V')
+     user = models.ForeignKey(to='Profile', on_delete=models.CASCADE, blank=False, null=False)
+     realm = models.ForeignKey(to='worldbuilding.Realm', on_delete=models.CASCADE, blank=False, null=False)
+     permissions = models.CharField(max_length=1, choices=PERMISSIONS, default='V', blank=False, null=False)
 
      def __str__(self):
           return self.user.user.username + ' - ' + self.realm.name + ' realm - ' + self.access_level
@@ -58,19 +58,19 @@ class UserRealmsAccess(models.Model):
      
 class UserPageAccess(models.Model):
 
-     user = models.ForeignKey(to='Profile', on_delete=models.CASCADE)
-     page = models.ForeignKey(to='worldbuilding.Page', on_delete=models.CASCADE)
-     access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V')
+     user = models.ForeignKey(to='Profile', on_delete=models.CASCADE, blank=False, null=False)
+     page = models.ForeignKey(to='worldbuilding.Page', on_delete=models.CASCADE, blank=False, null=False)
+     access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V', blank=False, null=False)
      
      def __str__(self):
           return self.user.username + ' - ' + self.page.name + ' page - ' + self.access_level
 
 
 class UserMediaProjectAccess(models.Model):
-     user = models.ForeignKey(to='Profile', on_delete=models.CASCADE)
-     media_project = models.ForeignKey(to='wiki.MediaProject', on_delete=models.CASCADE)
+     user = models.ForeignKey(to='Profile', on_delete=models.CASCADE, blank=False, null=False)
+     media_project = models.ForeignKey(to='wiki.MediaProject', on_delete=models.CASCADE, blank=False, null=False)
      
-     access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V')     
+     access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V', blank=False, null=False)     
 
      def __str__(self):
           return self.user.username + ' - ' + self.media_project.name + ' media project - ' + self.access_level
@@ -78,14 +78,14 @@ class UserMediaProjectAccess(models.Model):
 
 
 class Theme(models.Model):
-     name = models.CharField(max_length=50)
+     name = models.CharField(max_length=50, unique=True, blank=False, null=False)
      # description = models.CharField(max_length=255)
-     primary_color = models.CharField(max_length=7)
-     secondary_color = models.CharField(max_length=7)
-     tertiary_color = models.CharField(max_length=7)
-     button_style = models.CharField(max_length=10)
-     corner_roundness = models.PositiveSmallIntegerField()
-     background_blur_amount = models.PositiveSmallIntegerField()
+     primary_color = models.CharField(max_length=7, default='#fff', blank=False, null=False)
+     secondary_color = models.CharField(max_length=7, default='#fff', blank=False, null=False)
+     tertiary_color = models.CharField(max_length=7, default='#fff', blank=False, null=False)
+     button_style = models.CharField(max_length=10, default='#btn btn-primary', blank=False, null=False)
+     corner_roundness = models.PositiveSmallIntegerField(default=0, blank=False, null=False)
+     background_blur_amount = models.PositiveSmallIntegerField(default=0, blank=False, null=False)
 
      def __str__(self):
           return self.name
