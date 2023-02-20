@@ -38,6 +38,8 @@ class Page(models.Model):
 class PlotArc(Page):
      media_project = models.ForeignKey(to='wiki.MediaProject', on_delete=models.SET_NULL, null=True)
 
+     def __str__(self):
+          return self.name + " (Plot Arc)"
 
 class PlotPoint(Page):
      # Not sure if we want PlotPoint to inherit from page or not!
@@ -57,6 +59,8 @@ class PlotPoint(Page):
      # I think I want plot_progression to be able to be negative...?
      plot_progression = models.SmallIntegerField()
      
+     def __str__(self):
+          return self.name + " (Plot Point)"
 
 class Character(Page):
      # can be negative or positive

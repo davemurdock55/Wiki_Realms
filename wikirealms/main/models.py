@@ -39,16 +39,21 @@ class Profile(models.Model):
      media_projects = models.ManyToManyField(to='wiki.MediaProject')
      realms = models.ManyToManyField(to='worldbuilding.Realm', through='UserRealmsAccess')
      
+     # class Meta :
+     #      db_table = 'UserProfile'
+          
+     def __str__(self):
+          return self.user.username
+     
      
 class UserRealmsAccess(models.Model):
 
      user = models.ForeignKey(to='Profile', on_delete=models.CASCADE)
      realm = models.ForeignKey(to='worldbuilding.Realm', on_delete=models.CASCADE)
      permissions = models.CharField(max_length=1, choices=PERMISSIONS, default='V')
-     
 
      def __str__(self):
-          return self.user.username + ' - ' + self.realm.name + ' realm - ' + self.access_level
+          return self.user.user.username + ' - ' + self.realm.name + ' realm - ' + self.access_level
      
      
 class UserPageAccess(models.Model):
@@ -57,7 +62,6 @@ class UserPageAccess(models.Model):
      page = models.ForeignKey(to='worldbuilding.Page', on_delete=models.CASCADE)
      access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V')
      
-
      def __str__(self):
           return self.user.username + ' - ' + self.page.name + ' page - ' + self.access_level
 
@@ -70,6 +74,7 @@ class UserMediaProjectAccess(models.Model):
 
      def __str__(self):
           return self.user.username + ' - ' + self.media_project.name + ' media project - ' + self.access_level
+
 
 
 class Theme(models.Model):
