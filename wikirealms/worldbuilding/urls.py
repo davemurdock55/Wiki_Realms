@@ -10,7 +10,7 @@ urlpatterns = [
     path('view_realm/', viewRealmPageView, name='view_realm'),
     path('edit_realm/', editRealmPageView, name='edit_realm'),
     # character urls
-    path('view_character/', viewCharacterPageView, name='view_character'),
+    path('view_character/', characterPageView, name='view_character'),
     path('edit_character/', editCharacterPageView, name='edit_character'),
     # plot arc urls
     path('view_plot_arc/', viewPlotArcPageView, name='view_plot_arc'),

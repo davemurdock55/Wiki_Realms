@@ -41,10 +41,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'django_extensions',
     'django.contrib.gis',
+    'rest_framework',
     'main.apps.MainConfig',
     'wiki.apps.WikiConfig',
     'worldbuilding.apps.WorldbuildingConfig',
-
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -88,11 +89,11 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '1El2Is5Us10!',
         'HOST': 'localhost',
-        'PORT': 5432
+        'PORT': 5432,
     }
 }
 
-AUTH_USER_MODEL = 'main.User'
+# AUTH_USER_MODEL = 'main.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

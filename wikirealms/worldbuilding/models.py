@@ -10,7 +10,7 @@ from django.contrib.gis.db import models
 
 # Create your models here.
 class Realm(models.Model):
-     users = models.ManyToManyField(to='main.User')
+     users = models.ManyToManyField(to='main.Profile')
      name = models.CharField(max_length=100)
      description = models.CharField(max_length=255)
      image = models.ImageField(upload_to='images/')
@@ -24,7 +24,7 @@ class Realm(models.Model):
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 class Page(models.Model):
-     users = models.ManyToManyField(to='main.User')
+     users = models.ManyToManyField(to='main.Profile')
      realm = models.ForeignKey(to='Realm', on_delete=models.CASCADE)
      
      name = models.CharField(max_length=100)

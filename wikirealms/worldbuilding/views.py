@@ -1,7 +1,17 @@
 from django.shortcuts import render
-
+from django.http import JsonResponse
+from .models import *
 
 # Create your views here.
+
+# @api_view(['GET'])
+# def realm_list(request):
+#    realms = Realm.objects.all()
+#    data = {'realms': list(realms.values())}
+#    return JsonResponse(data)
+# 
+
+
 
 def  creatorDashboardPageView(request) :
    return render(request, 'worldbuilding/worldbuilding.html')
@@ -12,14 +22,14 @@ def  creatorDashboardPageView(request) :
 # vvv    REALM PAGE VIEWS    vvv
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-def createWorldPageView(request) :
-   return render(request, 'worldbuilding/create_world.html')
+def createRealmPageView(request) :
+   return render(request, 'worldbuilding/create_realm.html')
 
-def viewWorldPageView(request) :
-   return render(request, 'worldbuilding/world.html')
+def viewRealmPageView(request) :
+   return render(request, 'worldbuilding/realm.html')
 
-def editWorldPageView(request) :
-   return render(request, 'worldbuilding/edit_world.html')
+def editRealmPageView(request) :
+   return render(request, 'worldbuilding/edit_realm.html')
 
 
 

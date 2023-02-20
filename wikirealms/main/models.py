@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+# from django.contrib.auth.models import AbstractUser
 
 # Global Permissions Choices
 PERMISSIONS = (
@@ -11,7 +12,7 @@ PERMISSIONS = (
 # Create your models here.
 
 # The User class inherits from the AbstractUser class from django.contrib.auth.models
-class User(AbstractUser):
+class Profile(models.Model):
      # The AbstractUser model has: 
 
      # username: A field for the user's username. This field is required and must be unique.
@@ -29,7 +30,7 @@ class User(AbstractUser):
      # get_full_name(): A method that returns the user's full name.
      # get_short_name(): A method that returns the user's first name.
      # __str__(): A method that returns a string representation of the user.
-
+     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
      birthday = models.DateField(auto_now=False, auto_now_add=False)
      primary_content_type = models.CharField(max_length=50)
      description = models.CharField(max_length=255)
@@ -41,7 +42,7 @@ class User(AbstractUser):
      
 class UserRealmsAccess(models.Model):
 
-     user = models.ForeignKey(to='User', on_delete=models.CASCADE)
+     user = models.ForeignKey(to='Profile', on_delete=models.CASCADE)
      realm = models.ForeignKey(to='worldbuilding.Realm', on_delete=models.CASCADE)
      permissions = models.CharField(max_length=1, choices=PERMISSIONS, default='V')
      
@@ -52,7 +53,7 @@ class UserRealmsAccess(models.Model):
      
 class UserPageAccess(models.Model):
 
-     user = models.ForeignKey(to='User', on_delete=models.CASCADE)
+     user = models.ForeignKey(to='Profile', on_delete=models.CASCADE)
      page = models.ForeignKey(to='worldbuilding.Page', on_delete=models.CASCADE)
      access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V')
      
@@ -62,7 +63,7 @@ class UserPageAccess(models.Model):
 
 
 class UserMediaProjectAccess(models.Model):
-     user = models.ForeignKey(to='User', on_delete=models.CASCADE)
+     user = models.ForeignKey(to='Profile', on_delete=models.CASCADE)
      media_project = models.ForeignKey(to='wiki.MediaProject', on_delete=models.CASCADE)
      
      access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V')     
