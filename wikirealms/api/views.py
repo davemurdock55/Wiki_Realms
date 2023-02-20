@@ -29,28 +29,14 @@ class RealmPages(APIView):
           return Response(data)
      
 
-
-# 
-# @api_view(['GET'])
-# def realm_list(request): 
-#      
-#      email = request.session['email']
-#      user = User.objects.get(email=email)  
-# 
-#      # getting all the entries in the Realms table
-#      realms = Realm.objects.all()
-#      # getting the data from the table and putting it into a dictionary
-#      data = {'realms': list(realms.values())}
-#      return JsonResponse(data)
-# 
-# @api_view(['GET'])
-# def realm_pages(request):
-#      # get all the pages in the realm
-#      pages = Page.objects.all()
-#      return(Response({'pages': list(pages.values())}))
-# 
-# 
-# @api_view(['GET'])
-# def HelloWorldView(request):
-#      # print("Hello, world! ! ! ! ! ! ! ! ! ! \n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!")
-#      return Response({'message': 'Hello, world!'})
+class Characters(APIView):
+     def get(self, request):
+          characters = Character.objects.all()
+          data = {'pages': list(characters.values())}
+          return Response(data)
+     
+class Settings(APIView):
+     def get(self, request):
+          settings = Setting.objects.all()
+          data = {'pages': list(settings.values())}
+          return Response(data)

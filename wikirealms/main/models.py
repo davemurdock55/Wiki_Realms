@@ -36,8 +36,8 @@ class Profile(models.Model):
      description = models.CharField(max_length=255, blank=True, null=True)
      date_first_published = models.DateTimeField(auto_now_add=False, blank=True, null=True)
      theme = models.ForeignKey(to='Theme', on_delete=models.SET_NULL, blank=True, null=True)
-     media_projects = models.ManyToManyField(to='wiki.MediaProject', blank=True, null=True)
-     realms = models.ManyToManyField(to='worldbuilding.Realm', through='UserRealmsAccess', blank=True, null=True)
+     media_projects = models.ManyToManyField(to='wiki.MediaProject')
+     realms = models.ManyToManyField(to='worldbuilding.Realm', through='UserRealmsAccess')
      
      # class Meta :
      #      db_table = 'UserProfile'

@@ -17,7 +17,7 @@ class MediaProject(models.Model):
 
 
 class WikiPage(models.Model):
-     users = models.ManyToManyField(to='main.Profile', blank=False, null=False)
+     users = models.ManyToManyField(to='main.Profile')
      realm = models.ForeignKey(to='worldbuilding.Realm', on_delete=models.CASCADE, blank=False, null=False)
      
      title = models.CharField(max_length=100, blank=False, null=False)

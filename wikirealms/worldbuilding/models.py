@@ -10,7 +10,7 @@ from django.contrib.gis.db import models
 
 # Create your models here.
 class Realm(models.Model):
-     users = models.ManyToManyField(to='main.Profile', blank=False, null=False)
+     users = models.ManyToManyField(to='main.Profile')
      name = models.CharField(max_length=100, blank=False, null=False)
      description = models.CharField(max_length=255, blank=True, null=True)
      image = models.ImageField(upload_to='images/', blank=True, null=True)
@@ -24,7 +24,7 @@ class Realm(models.Model):
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 class Page(models.Model):
-     users = models.ManyToManyField(to='main.Profile', blank=False, null=False)
+     users = models.ManyToManyField(to='main.Profile')
      realm = models.ForeignKey(to='Realm', on_delete=models.CASCADE, blank=False, null=False)
      
      name = models.CharField(max_length=100, blank=False, null=False)
@@ -50,11 +50,11 @@ class PlotPoint(Page):
      # a plot point can only be in one setting (unless we want to change this to be many-to-many)
      backdrop = models.ForeignKey(to='Setting', related_name='backdrop', on_delete=models.SET_NULL, blank=True, null=True)
 
-     pages = models.ManyToManyField(to='Page', related_name='pages', blank=True, null=True)
-     characters = models.ManyToManyField(to='Character', related_name='characters', blank=True, null=True)
-     items = models.ManyToManyField(to='Item', related_name='items', blank=True, null=True)
-     magic_systems = models.ManyToManyField(to='Magic', related_name='magic_systems', blank=True, null=True)
-     social_structures = models.ManyToManyField(to='SocialStructure', related_name='social_structures', blank=True, null=True)
+     pages = models.ManyToManyField(to='Page', related_name='pages')
+     characters = models.ManyToManyField(to='Character', related_name='characters')
+     items = models.ManyToManyField(to='Item', related_name='items')
+     magic_systems = models.ManyToManyField(to='Magic', related_name='magic_systems')
+     social_structures = models.ManyToManyField(to='SocialStructure', related_name='social_structures')
 
      # I think I want plot_progression to be able to be negative...?
      plot_progression = models.SmallIntegerField(blank=True, null=True)
@@ -147,7 +147,7 @@ class ItemBlock(ContentBlock):
 
 class CharacterListBlock(ContentBlock):
      # a character list can have multiple characters and a character can be in multiple character lists
-     characters = models.ManyToManyField(to='Character', related_name='characters_in_character_list', blank=True, null=True)
+     characters = models.ManyToManyField(to='Character', related_name='characters_in_character_list')
      
      name = models.CharField(max_length=100, blank=True, null=True)
      
@@ -194,7 +194,7 @@ class CharacterWebBlock(ContentBlock):
      description = models.CharField(max_length=255, blank=True, null=True)
 
      # this was automatically created by co-pilot
-     relationships = models.ManyToManyField(to='CharacterRelationship', related_name='relationships', blank=True, null=True)
+     relationships = models.ManyToManyField(to='CharacterRelationship', related_name='relationships')
 
 
 
@@ -203,7 +203,7 @@ class TimelineBlock(ContentBlock):
      description = models.CharField(max_length=255, blank=True, null=True)
 
      # this was automatically created by co-pilot
-     plot_points = models.ManyToManyField(to='PlotPoint', related_name='plot_points', blank=True, null=True)
+     plot_points = models.ManyToManyField(to='PlotPoint', related_name='plot_points')
 
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
