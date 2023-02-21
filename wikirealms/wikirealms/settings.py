@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'django_extensions',
     'django.contrib.gis',
+    'corsheaders',
     'rest_framework',
     'main.apps.MainConfig',
     'wiki.apps.WikiConfig',
@@ -51,12 +52,15 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+
 
 ROOT_URLCONF = "wikirealms.urls"
 
@@ -152,3 +156,14 @@ GRAPH_MODELS = {
     'all_applications': True,
     'group_models': True,
 }
+
+
+# CORS (API Whitelist) settings
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+]
