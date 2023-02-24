@@ -2,7 +2,6 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-     path('hello/', HelloWorldView.as_view(), name='hello_world'),
      # api url for a list of all the realms (at all!!)
      path('realms/', Realms.as_view(), name='realms'),
      # api url for all the realm pages (at all!)

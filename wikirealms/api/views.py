@@ -10,10 +10,6 @@ from worldbuilding.models import *
 
 app_name = 'api'
 
-class HelloWorldView(APIView):
-     def get(self, request):
-          return Response({'message': 'Hello, world!'})
-
 
 class Realms(APIView):
      def get(self, request):

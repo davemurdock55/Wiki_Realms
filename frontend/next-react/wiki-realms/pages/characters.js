@@ -48,7 +48,11 @@ function Characters ()
                               <>
                                    <ul>
                                         { characters.map((character) => (
-                                             <li key={ character.id }>{ character.name }<img style={ { 'width': '500px' } } src={ 'http://127.0.0.1:8000/media/' + character.header_image } /><br />{ character.description }</li>
+                                             <li key={ character.id }>
+                                                  { character.name }
+                                                  <img style={ { 'width': '500px' } } src={ 'http://127.0.0.1:8000/media/' + character.header_image } />
+                                                  <br />{ character.description }
+                                             </li>
                                         )) }
                                    </ul>
                                    <div></div>
@@ -57,6 +61,11 @@ function Characters ()
                     </div>
 
                </main>
+               <div>
+                    <div>
+
+                    </div>
+               </div>
           </>
      );
 }

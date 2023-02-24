@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import styles from '@/styles/Home.module.css';
 
 
+
 const inter = Inter({ subsets: ['latin'] });
 
 
@@ -34,6 +35,7 @@ function Realms ()
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className={ styles.main }>
 
         <div className={ styles.center }>
