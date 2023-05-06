@@ -13,7 +13,7 @@ PERMISSIONS = (
 
 # The User class inherits from the AbstractUser class from django.contrib.auth.models
 class Profile(models.Model):
-     # The AbstractUser model has: 
+     # The AbstractUser model has:
 
      # username: A field for the user's username. This field is required and must be unique.
      # first_name: A field for the user's first name.
@@ -38,14 +38,14 @@ class Profile(models.Model):
      theme = models.ForeignKey(to='Theme', on_delete=models.SET_NULL, blank=True, null=True)
      media_projects = models.ManyToManyField(to='wiki.MediaProject')
      realms = models.ManyToManyField(to='worldbuilding.Realm', through='UserRealmsAccess')
-     
+
      # class Meta :
      #      db_table = 'UserProfile'
-          
+
      def __str__(self):
           return self.user.username
-     
-     
+
+
 class UserRealmsAccess(models.Model):
 
      user = models.ForeignKey(to='Profile', on_delete=models.CASCADE, blank=False, null=False)
@@ -54,14 +54,14 @@ class UserRealmsAccess(models.Model):
 
      def __str__(self):
           return self.user.user.username + ' - ' + self.realm.name + ' realm - ' + self.access_level
-     
-     
+
+
 class UserPageAccess(models.Model):
 
      user = models.ForeignKey(to='Profile', on_delete=models.CASCADE, blank=False, null=False)
      page = models.ForeignKey(to='worldbuilding.Page', on_delete=models.CASCADE, blank=False, null=False)
      access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V', blank=False, null=False)
-     
+
      def __str__(self):
           return self.user.username + ' - ' + self.page.name + ' page - ' + self.access_level
 
@@ -69,8 +69,8 @@ class UserPageAccess(models.Model):
 class UserMediaProjectAccess(models.Model):
      user = models.ForeignKey(to='Profile', on_delete=models.CASCADE, blank=False, null=False)
      media_project = models.ForeignKey(to='wiki.MediaProject', on_delete=models.CASCADE, blank=False, null=False)
-     
-     access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V', blank=False, null=False)     
+
+     access_level = models.CharField(max_length=1, choices=PERMISSIONS, default='V', blank=False, null=False)
 
      def __str__(self):
           return self.user.username + ' - ' + self.media_project.name + ' media project - ' + self.access_level

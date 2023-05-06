@@ -8,7 +8,7 @@ from django.shortcuts import render
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 def viewWikiPagePageView(request) :
-   return render(request, 'wiki/wiki_page.html')   
- 
+   return render(request, 'wiki/wiki_page.html')
+
 def editWikiPagePageView(request) :
-   return render(request, 'wiki/edit_wiki_page.html')     
+   return render(request, 'wiki/edit_wiki_page.html')

@@ -19,7 +19,7 @@ class MediaProject(models.Model):
 class WikiPage(models.Model):
      users = models.ManyToManyField(to='main.Profile')
      realm = models.ForeignKey(to='worldbuilding.Realm', on_delete=models.CASCADE, blank=False, null=False)
-     
+
      title = models.CharField(max_length=100, blank=False, null=False)
      header_image = models.ImageField(upload_to='images/', blank=True, null=True)
      subheading = models.CharField(max_length=100, blank=True, null=True)
