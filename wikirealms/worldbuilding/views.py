@@ -9,7 +9,7 @@ from .models import *
 #    realms = Realm.objects.all()
 #    data = {'realms': list(realms.values())}
 #    return JsonResponse(data)
-# 
+#
 
 
 

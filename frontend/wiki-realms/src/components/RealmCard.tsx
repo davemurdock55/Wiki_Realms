@@ -19,8 +19,8 @@ export default function RealmCard(props: RealmCardProps) {
           src={props.image}
           alt=""
         />
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-800 to-transparent rounded-b-3xl">
-          <h3 className="text-lg font-bold text-white">{props.title}</h3>
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-800/50 to-transparent rounded-b-3xl">
+          <h3 className="text-3xl font-bold text-white">{props.title}</h3>
           <p className="mt-1 text-gray-300">{props.description}</p>
         </div>
       </a>
